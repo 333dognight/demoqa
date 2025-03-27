@@ -1,3 +1,6 @@
+import com.codeborne.selenide.ClickOptions;
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import demoqa.DataGenerator;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,7 +16,7 @@ public class TextBoxTests {
     @BeforeAll
 
     static void beforeAll() {
-        Configuration.browserSize = "425x960";
+        Configuration.browserSize = "425x1080";
         Configuration.baseUrl = "https://demoqa.com";
     }
 
@@ -30,15 +33,20 @@ public class TextBoxTests {
         $("#firstName").setValue(userName);
         $("#lastName").setValue(userName);
         $("#userEmail").setValue(userEmail);
-        $("#gender-radio-1").click();
+        $("#gender-radio-1").click(ClickOptions.usingJavaScript());
         $("#userNumber").setValue(phoneNumber);
+        $("#dateOfBirthInput").scrollIntoView(true).click();
         $("#dateOfBirthInput").clear();
         $("#dateOfBirthInput").setValue(dataGenerator.RandomDate());
-        $("#hobbies-checkbox-1").click();
-        $("#hobbies-checkbox-2").click();
-        $("#hobbies-checkbox-3").click();
-        $("#state").selectOptionByValue("NCR");
-        $("#city").selectOption(0);
+        $("#hobbies-checkbox-1").click(ClickOptions.usingJavaScript());
+        $("#hobbies-checkbox-2").click(ClickOptions.usingJavaScript());
+        $("#hobbies-checkbox-3").click(ClickOptions.usingJavaScript());
+        $("#state").click();
+        $$("#state").shouldBe(CollectionCondition.sizeGreaterThan(0));
+        $$("#state").find(Condition.text("NCR")).click();
+        $("#city").click();
+        $$("#city").shouldBe(CollectionCondition.sizeGreaterThan(0));
+        $$("#city").find(Condition.text("Delhi")).click();
         $("#currentAddress").setValue(currentAddress);
         $("#submit").click();
         $("#output").shouldBe(visible);

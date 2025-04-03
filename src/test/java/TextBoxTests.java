@@ -1,27 +1,18 @@
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import demoqa.DataGenerator;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TextBoxTests {
+public class TextBoxTests extends TestBase {
 
     DataGenerator dataGenerator = new DataGenerator();
 
-    @BeforeAll
-
-    static void beforeAll() {
-        Configuration.browserSize = "425x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-    }
-
-
-    String userName = "Andrey";
+    String firstName = "Andrey";
+    String lastName = "Petrov";
     String userEmail = "abc123@lookout.com";
     String currentAddress = "Москва, ул. Виноградная";
     String phoneNumber = dataGenerator.randomPhoneNumber(10);
@@ -29,10 +20,13 @@ public class TextBoxTests {
     @Test
     void fillFormTest() {
 
-        open("/automation-practice-form");
-        $("#firstName").setValue(userName);
-        $("#lastName").setValue(userName);
-        $("#userEmail").setValue(userEmail);
+        registrationPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(userEmail)
+                .setCurrentAddress(currentAddress)
+                .setPhoneNumber(phoneNumber);
+
         $("#gender-radio-1").click(ClickOptions.usingJavaScript());
         $("#userNumber").setValue(phoneNumber);
         $("#dateOfBirthInput").scrollIntoView(true).click();
@@ -47,7 +41,6 @@ public class TextBoxTests {
         $("#city").click();
         $$("#city").shouldBe(CollectionCondition.sizeGreaterThan(0));
         $$("#city").find(Condition.text("Delhi")).click();
-        $("#currentAddress").setValue(currentAddress);
         $("#submit").click();
         $("#output").shouldBe(visible);
 

@@ -19,8 +19,9 @@ public class DataGenerator {
     public String RandomDate() {
         Random randomDate = new Random();
         int currentYear = Year.now().getValue();
-        int maxAgeForLoan = 20;
-        int year = randomDate.nextInt(currentYear - maxAgeForLoan + 1) + 65; // Random year
+        int minAgeForLoan = currentYear - 20;
+        int maxAgeForLoan = currentYear - 65;
+        int year = randomDate.nextInt(minAgeForLoan - maxAgeForLoan + 1) + maxAgeForLoan; // Random year
         int month = randomDate.nextInt(12) + 1; // Random month between 1 and 12
         int day = switch (month) {
             case 2 -> // February
@@ -35,11 +36,14 @@ public class DataGenerator {
 
         // Format the date
         return String.format("%02d-%02d-%d", day, month, year);
+
     }
 
     private static boolean isLeapYear(int year) {
+
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
+
 }
 
 

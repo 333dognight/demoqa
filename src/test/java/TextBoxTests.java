@@ -3,6 +3,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import demoqa.DataGenerator;
 import org.junit.jupiter.api.Test;
+import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -10,12 +11,12 @@ import static com.codeborne.selenide.Selenide.*;
 public class TextBoxTests extends TestBase {
 
     DataGenerator dataGenerator = new DataGenerator();
+    CalendarComponent calendarComponent = new CalendarComponent();
 
     String firstName = "Andrey";
     String lastName = "Petrov";
     String userEmail = "abc123@lookout.com";
     String currentAddress = "Москва, ул. Виноградная";
-    String phoneNumber = dataGenerator.randomPhoneNumber(10);
 
     @Test
     void fillFormTest() {
@@ -25,13 +26,10 @@ public class TextBoxTests extends TestBase {
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
                 .setCurrentAddress(currentAddress)
-                .setPhoneNumber(phoneNumber);
+                .setPhoneNumber()
+                .setCalendarDate();
 
         $("#gender-radio-1").click(ClickOptions.usingJavaScript());
-        $("#userNumber").setValue(phoneNumber);
-        $("#dateOfBirthInput").scrollIntoView(true).click();
-        $("#dateOfBirthInput").clear();
-        $("#dateOfBirthInput").setValue(dataGenerator.RandomDate());
         $("#hobbies-checkbox-1").click(ClickOptions.usingJavaScript());
         $("#hobbies-checkbox-2").click(ClickOptions.usingJavaScript());
         $("#hobbies-checkbox-3").click(ClickOptions.usingJavaScript());

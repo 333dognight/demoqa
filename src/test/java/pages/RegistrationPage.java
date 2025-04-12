@@ -5,6 +5,7 @@ import demoqa.DataGenerator;
 import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -19,7 +20,9 @@ public class RegistrationPage {
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
             currentAddressInput = $("#currentAddress"),
-            phoneNumberInput = $("#userNumber");
+            phoneNumberInput = $("#userNumber"),
+            stateSelect = $("#stateCity-wrapper"),
+            citySelect = $("#stateCity-wrapper");
 
 
     public RegistrationPage openPage() {
@@ -53,8 +56,20 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setCalendarDate() {
-        calendarComponent.setDate();
+    public RegistrationPage setBirthDate(String day, String month, String year) {
+        calendarComponent.setDate(day, month, year);
+        return this;
+    }
+
+    public RegistrationPage selectState(String state) {
+        $("#state").click();
+        stateSelect.$(byText(state)).click();
+        return this;
+    }
+
+    public RegistrationPage selectCity(String city) {
+        $("#city").click();
+        citySelect.$(byText(city)).click();
         return this;
     }
 

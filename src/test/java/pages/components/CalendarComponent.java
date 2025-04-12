@@ -1,16 +1,13 @@
 package pages.components;
-
-import demoqa.DataGenerator;
-
 import static com.codeborne.selenide.Selenide.$;
 
-public class CalendarComponent {
-    DataGenerator dataGenerator = new DataGenerator();
+public class CalendarComponent { ;
 
-    public void setDate() {
+    public void setDate(String day, String month, String year) {
         $("#dateOfBirthInput").scrollIntoView(true).click();
-        $("#dateOfBirthInput").clear();
-        $("#dateOfBirthInput").setValue(dataGenerator.RandomDate());
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").selectOption(year);
+        $(".react-datepicker__day--0" + day).click();
 
     }
 }

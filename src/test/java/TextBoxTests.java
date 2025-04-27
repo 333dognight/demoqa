@@ -1,11 +1,5 @@
 import com.codeborne.selenide.ClickOptions;
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests extends TestBase {
@@ -16,6 +10,8 @@ public class TextBoxTests extends TestBase {
     String currentAddress = "Москва, ул. Виноградная";
     String state = "NCR";
     String city = "Delhi";
+    String genderRadio = "1";
+
 
     @Test
     void fillFormTest() {
@@ -30,18 +26,17 @@ public class TextBoxTests extends TestBase {
                 .selectState(state)
                 .selectCity(city);
 
-        $("#gender-radio-1").click(ClickOptions.usingJavaScript());
+        $("#gender-radio-" + genderRadio).click(ClickOptions.usingJavaScript());
         $("#hobbies-checkbox-1").click(ClickOptions.usingJavaScript());
         $("#hobbies-checkbox-2").click(ClickOptions.usingJavaScript());
         $("#hobbies-checkbox-3").click(ClickOptions.usingJavaScript());
         $("#submit").click();
 
-        $(".modal-content").shouldBe(visible);
-        $(".modal-header").shouldHave(text("Thanks for submitting the form"));
-
-        $("#closeLargeModal").click();
-        $(".modal-content").shouldNotBe(visible);
-
+        registrationPage.checkRegistrationModalWindow()
+                .checkResultInModalWindow("Student Name", firstName + " " + lastName)
+                .checkResultInModalWindow("Student Email", userEmail)
+                .checkResultInModalWindow("Gender", "Male")
+                .checkModalWindowIsClose();
 
     }
 }

@@ -1,7 +1,9 @@
 package pages;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import demoqa.DataGenerator;
+import demoqa.TestData;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultsModal;
 
@@ -9,9 +11,9 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static demoqa.TestData.*;
 
 public class RegistrationPage {
-    DataGenerator dataGenerator = new DataGenerator();
     CalendarComponent calendarComponent = new CalendarComponent();
     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
 
@@ -24,7 +26,9 @@ public class RegistrationPage {
             currentAddressInput = $("#currentAddress"),
             phoneNumberInput = $("#userNumber"),
             stateSelect = $("#stateCity-wrapper"),
-            citySelect = $("#stateCity-wrapper");
+            citySelect = $("#stateCity-wrapper"),
+            subjectInput = $("#subjectsContainer");
+
 
 
     public RegistrationPage openPage() {
@@ -33,18 +37,18 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setFirstName(String value) {
-        firstNameInput.setValue(value);
+    public RegistrationPage setFirstName() {
+        firstNameInput.setValue(randomString(10));
         return this;
     }
 
-    public RegistrationPage setLastName(String value) {
-       lastNameInput.setValue(value);
+    public RegistrationPage setLastName() {
+       lastNameInput.setValue(randomString(10));
         return this;
     }
 
-    public RegistrationPage setUserEmail(String value) {
-        userEmailInput.setValue(value);
+    public RegistrationPage setUserEmail() {
+        userEmailInput.setValue(randomEmail(10));
         return this;
     }
 
@@ -54,12 +58,22 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setPhoneNumber() {
-        phoneNumberInput.setValue(dataGenerator.randomPhoneNumber(10));
+        phoneNumberInput.setValue(randomPhone("+7", 111111111L, 999999999L));
         return this;
     }
 
     public RegistrationPage setBirthDate(String day, String month, String year) {
         calendarComponent.setDate(day, month, year);
+        return this;
+    }
+
+    public RegistrationPage setSubjects() {
+        subjectInput.setValue(randomSubjectItem());
+        return this;
+    }
+
+    public RegistrationPage selectHobbies(String hobbiesCheckbox) {
+        $("#hobbies-checkbox-" + hobbiesCheckbox).click(ClickOptions.usingJavaScript());
         return this;
     }
 
@@ -72,6 +86,11 @@ public class RegistrationPage {
     public RegistrationPage selectCity(String city) {
         $("#city").click();
         citySelect.$(byText(city)).click();
+        return this;
+    }
+
+    public RegistrationPage selectGender(String genderRadio) {
+        $("#gender-radio-" + genderRadio).click(ClickOptions.usingJavaScript());
         return this;
     }
 

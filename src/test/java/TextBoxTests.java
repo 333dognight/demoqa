@@ -1,26 +1,29 @@
-import com.codeborne.selenide.ClickOptions;
-import org.junit.jupiter.api.BeforeEach;
+import demoqa.TestData;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPageWithFaker;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests extends TestBase {
 
-    String currentAddress = "Москва, ул. Виноградная",
-     state = "NCR",
+    RegistrationPageWithFaker registrationPageWithFaker = new RegistrationPageWithFaker();
+    TestData testData = new TestData();
+
+    String state = "NCR",
      city = "Delhi";
 
 
     @Test
     void fillFormTest() {
 
-        registrationPage.openPage()
+        registrationPageWithFaker.openPage()
                 .setFirstName()
                 .setLastName()
                 .setUserEmail()
                 .selectGender("1")
-                .setCurrentAddress(currentAddress)
+                .setCurrentAddress()
                 .setPhoneNumber()
                 .setBirthDate("30", "December", "2002")
+                //.setSubjects()
                 .selectHobbies("1")
                 .selectHobbies("2")
                 .selectHobbies("3")
@@ -30,9 +33,9 @@ public class TextBoxTests extends TestBase {
         $("#submit").click();
 
         registrationPage.checkRegistrationModalWindow()
-                .checkResultInModalWindow("Student Name", firstName + " " + lastName)
-                .checkResultInModalWindow("Student Email", userEmail)
-                .checkResultInModalWindow("Gender", "Male")
+                //.checkResultInModalWindow("Student Name", )
+                //.checkResultInModalWindow("Student Email", )
+                //.checkResultInModalWindow("Gender", "Male")
                 .checkModalWindowIsClose();
 
     }

@@ -12,7 +12,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "425x1080";
-        Configuration.browser = "Firefox";
+        //Configuration.browser = "Firefox";
         Configuration.baseUrl = "https://demoqa.com";
     }
 

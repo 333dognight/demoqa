@@ -12,6 +12,7 @@ dependencies {
     testRuntimeOnly('org.junit.platform:junit-platform-launcher')
     testImplementation 'com.codeborne:selenide:7.9.0'
     implementation 'commons-io:commons-io:2.18.0'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
 }
 
 test {

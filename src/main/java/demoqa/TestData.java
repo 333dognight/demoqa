@@ -1,10 +1,15 @@
 package demoqa;
+import com.github.javafaker.Faker;
+
 import java.security.SecureRandom;
 import java.time.Year;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TestData {
+
+    Faker faker = new Faker();
 
     static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
@@ -14,6 +19,18 @@ public class TestData {
         for (int i = 0; i < len; i++)
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
+    }
+
+    public String randomFirstName() {
+       return faker.name().firstName();
+    }
+
+    public String randomLastName() {
+        return faker.name().lastName();
+    }
+
+    public String randomEmail() {
+        return faker.internet().emailAddress();
     }
 
     public static Long randomNumber(Long min, Long max) {
@@ -33,10 +50,9 @@ public class TestData {
         return randomString(10) + "@gmail.com";
     }
 
-    public static String randomSubjectItem() {
-        String[] subjectItems = {"seed", "123987", "cherry", "bench", "bird", "Verstappen"};
-        int index = randomInt(0, 5);
-        return subjectItems[index];
+    public static String randomSubjectItem(String[] values) {
+        int index = randomInt(0, values.length);
+        return values[index];
     }
 
     public String RandomDate() {

@@ -33,7 +33,7 @@ public class RegistrationPageWithFaker {
             citySelect = $("#stateCity-wrapper"),
             subjectInput = $("#subjectsContainer");
 
-    String[] subjectItems = {"seed", "123987", "cherry", "bench", "bird", "Verstappen"};
+    String[] subjectItems = {"Chemistry", "Physics", "English", "Arts"};
 
     public RegistrationPageWithFaker openPage() {
         open("/automation-practice-form");

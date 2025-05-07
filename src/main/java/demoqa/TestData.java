@@ -1,13 +1,12 @@
 package demoqa;
-import com.github.javafaker.Faker;
 import java.security.SecureRandom;
 import java.time.Year;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class TestData {
+import static demoqa.DataGenerator.fakerRU;
 
-    Faker faker = new Faker();
+public class TestData {
 
     static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
@@ -20,15 +19,15 @@ public class TestData {
     }
 
     public String randomFirstName() {
-       return faker.name().firstName();
+       return fakerRU.name().firstName();
     }
 
     public String randomLastName() {
-        return faker.name().lastName();
+        return fakerRU.name().lastName();
     }
 
     public String randomEmail() {
-        return faker.internet().emailAddress();
+        return fakerRU.internet().emailAddress();
     }
 
     public static Long randomNumber(Long min, Long max) {

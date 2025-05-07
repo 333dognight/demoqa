@@ -1,9 +1,7 @@
 package demoqa;
 import com.github.javafaker.Faker;
-
 import java.security.SecureRandom;
 import java.time.Year;
-import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 

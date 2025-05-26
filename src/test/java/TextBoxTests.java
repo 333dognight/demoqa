@@ -1,4 +1,3 @@
-import demoqa.TestData;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPageWithFaker;
 import static com.codeborne.selenide.Selenide.*;
@@ -6,7 +5,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class TextBoxTests extends TestBase {
 
     RegistrationPageWithFaker registrationPageWithFaker = new RegistrationPageWithFaker();
-    TestData testData = new TestData();
 
     String state = "NCR",
      city = "Delhi";

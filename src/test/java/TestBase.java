@@ -1,10 +1,6 @@
 import com.codeborne.selenide.Configuration;
-import demoqa.DataGenerator;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
-
-import static demoqa.TestData.*;
 
 public class TestBase {
     RegistrationPage registrationPage = new RegistrationPage();

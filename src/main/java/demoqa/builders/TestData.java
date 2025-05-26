@@ -1,16 +1,18 @@
-package demoqa;
+package demoqa.builders;
+import demoqa.models.RegistrationPageApiModel;
 import java.security.SecureRandom;
 import java.time.Year;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-
-import static demoqa.DataGenerator.fakerRU;
+import static demoqa.builders.DataGenerator.fakerRU;
 
 public class TestData {
 
+    RegistrationPageApiModel registrationPageApiModel;
+    DataGenerator dataGenerator;
+
     static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
-
     public static String randomString(int len) {
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++)
@@ -18,16 +20,13 @@ public class TestData {
         return sb.toString();
     }
 
-    public String randomFirstName() {
-       return fakerRU.name().firstName();
-    }
-
-    public String randomLastName() {
-        return fakerRU.name().lastName();
-    }
-
-    public String randomEmail() {
-        return fakerRU.internet().emailAddress();
+    public static RegistrationPageApiModel getRegistrationApiModel() {
+       return RegistrationPageApiModel.builder()
+               .firstName(fakerRU.name().firstName())
+               .lastName(fakerRU.name().lastName())
+               .userEmail(fakerRU.internet().emailAddress())
+               .phoneNumber(fakerRU.expression("#{numerify '79#########'}"))
+               .build();
     }
 
     public static Long randomNumber(Long min, Long max) {

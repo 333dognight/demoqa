@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static demoqa.TestData.*;
+import static demoqa.builders.TestData.*;
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();

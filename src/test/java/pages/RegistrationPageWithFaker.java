@@ -3,7 +3,8 @@ package pages;
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import com.github.javafaker.Faker;
-import demoqa.TestData;
+import demoqa.builders.TestData;
+import demoqa.models.RegistrationPageApiModel;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultsModal;
 
@@ -13,13 +14,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static demoqa.TestData.*;
+import static demoqa.builders.TestData.*;
 
 public class RegistrationPageWithFaker {
     CalendarComponent calendarComponent = new CalendarComponent();
     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     Faker faker = new Faker(new Locale("ru"));
     TestData testData = new TestData();
+    RegistrationPageApiModel registrationPageApiModel;
 
     private final String TITLE_TEXT = "Student Registration Form";
 
@@ -42,18 +44,17 @@ public class RegistrationPageWithFaker {
     }
 
     public RegistrationPageWithFaker setFirstName() {
-        firstNameInput.setValue(testData.randomFirstName());
+        firstNameInput.setValue(getRegistrationApiModel().getFirstName());
         return this;
     }
 
-
     public RegistrationPageWithFaker setLastName() {
-       lastNameInput.setValue(testData.randomLastName());
+       lastNameInput.setValue(getRegistrationApiModel().getLastName());
         return this;
     }
 
     public RegistrationPageWithFaker setUserEmail() {
-        userEmailInput.setValue(testData.randomEmail());
+        userEmailInput.setValue(getRegistrationApiModel().getUserEmail());
         return this;
     }
 

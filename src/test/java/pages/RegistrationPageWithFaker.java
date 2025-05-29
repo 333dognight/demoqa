@@ -3,8 +3,10 @@ package pages;
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import com.github.javafaker.Faker;
+import demoqa.builders.DataGenerator;
 import demoqa.builders.TestData;
 import demoqa.models.RegistrationPageApiModel;
+import org.junit.jupiter.api.BeforeEach;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultsModal;
 
@@ -14,14 +16,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static demoqa.builders.DataGenerator.fakerEN;
+import static demoqa.builders.DataGenerator.fakerRU;
 import static demoqa.builders.TestData.*;
 
 public class RegistrationPageWithFaker {
+
     CalendarComponent calendarComponent = new CalendarComponent();
     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
-    Faker faker = new Faker(new Locale("ru"));
-    TestData testData = new TestData();
-    RegistrationPageApiModel registrationPageApiModel;
 
     private final String TITLE_TEXT = "Student Registration Form";
 
@@ -37,43 +39,52 @@ public class RegistrationPageWithFaker {
 
     String[] subjectItems = {"Chemistry", "Physics", "English", "Arts"};
 
+    public static RegistrationPageApiModel getRegistrationPageApiModel() {
+        return RegistrationPageApiModel.builder()
+                .firstName(fakerRU.name().firstName())
+                .lastName(fakerRU.name().lastName())
+                .userEmail(fakerEN.internet().emailAddress())
+                .phoneNumber(fakerRU.expression("#{numerify '79#########'}"))
+                .build();
+    }
+
     public RegistrationPageWithFaker openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text(TITLE_TEXT));
         return this;
     }
 
-    public RegistrationPageWithFaker setFirstName() {
-        firstNameInput.setValue(getRegistrationApiModel().getFirstName());
+    public RegistrationPageWithFaker fillFirstName() {
+        firstNameInput.setValue(getRegistrationPageApiModel().getFirstName());
         return this;
     }
 
-    public RegistrationPageWithFaker setLastName() {
-       lastNameInput.setValue(getRegistrationApiModel().getLastName());
+    public RegistrationPageWithFaker fillLastName() {
+       lastNameInput.setValue(getRegistrationPageApiModel().getLastName());
+       return this;
+    }
+
+    public RegistrationPageWithFaker fillUserEmail() {
+        userEmailInput.setValue(getRegistrationPageApiModel().getUserEmail());
         return this;
     }
 
-    public RegistrationPageWithFaker setUserEmail() {
-        userEmailInput.setValue(getRegistrationApiModel().getUserEmail());
+    public RegistrationPageWithFaker fillCurrentAddress() {
+        currentAddressInput.setValue(DataGenerator.fakerRU.address().fullAddress());
         return this;
     }
 
-    public RegistrationPageWithFaker setCurrentAddress() {
-        currentAddressInput.setValue(faker.address().fullAddress());
+    public RegistrationPageWithFaker fillPhoneNumber() {
+        phoneNumberInput.setValue(getRegistrationPageApiModel().getPhoneNumber());
         return this;
     }
 
-    public RegistrationPageWithFaker setPhoneNumber() {
-        phoneNumberInput.setValue(faker.phoneNumber().subscriberNumber(10));
-        return this;
-    }
-
-    public RegistrationPageWithFaker setBirthDate(String day, String month, String year) {
+    public RegistrationPageWithFaker fillBirthDate(String day, String month, String year) {
         calendarComponent.setDate(day, month, year);
         return this;
     }
 
-    public RegistrationPageWithFaker setSubjects() {
+    public RegistrationPageWithFaker fillSubjects() {
         subjectInput.setValue(randomSubjectItem(subjectItems));
         return this;
     }

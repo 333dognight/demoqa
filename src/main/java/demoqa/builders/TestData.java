@@ -4,11 +4,12 @@ import java.security.SecureRandom;
 import java.time.Year;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static demoqa.builders.DataGenerator.fakerEN;
 import static demoqa.builders.DataGenerator.fakerRU;
 
 public class TestData {
 
-    RegistrationPageApiModel registrationPageApiModel;
     DataGenerator dataGenerator;
 
     static final String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -18,15 +19,6 @@ public class TestData {
         for (int i = 0; i < len; i++)
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
-    }
-
-    public static RegistrationPageApiModel getRegistrationApiModel() {
-       return RegistrationPageApiModel.builder()
-               .firstName(fakerRU.name().firstName())
-               .lastName(fakerRU.name().lastName())
-               .userEmail(fakerRU.internet().emailAddress())
-               .phoneNumber(fakerRU.expression("#{numerify '79#########'}"))
-               .build();
     }
 
     public static Long randomNumber(Long min, Long max) {

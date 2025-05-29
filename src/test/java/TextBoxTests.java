@@ -1,9 +1,11 @@
+import demoqa.models.RegistrationPageApiModel;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPageWithFaker;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests extends TestBase {
 
+    RegistrationPageApiModel registrationPageApiModel;
     RegistrationPageWithFaker registrationPageWithFaker = new RegistrationPageWithFaker();
 
     String state = "NCR",
@@ -14,13 +16,13 @@ public class TextBoxTests extends TestBase {
     void fillFormTest() {
 
         registrationPageWithFaker.openPage()
-                .setFirstName()
-                .setLastName()
-                .setUserEmail()
+                .fillFirstName()
+                .fillLastName()
+                .fillUserEmail()
                 .selectGender("1")
-                .setCurrentAddress()
-                .setPhoneNumber()
-                .setBirthDate("30", "December", "2002")
+                .fillCurrentAddress()
+                .fillPhoneNumber()
+                .fillBirthDate("30", "December", "2002")
                 //.setSubjects()
                 .selectHobbies("1")
                 .selectHobbies("2")
@@ -30,8 +32,8 @@ public class TextBoxTests extends TestBase {
 
         $("#submit").click();
 
-        registrationPage.checkRegistrationModalWindow()
-                //.checkResultInModalWindow("Student Name", )
+        registrationPageWithFaker.checkRegistrationModalWindow()
+                .checkResultInModalWindow("Student Name", registrationPageApiModel.getFirstName())
                 //.checkResultInModalWindow("Student Email", )
                 //.checkResultInModalWindow("Gender", "Male")
                 .checkModalWindowIsClose();

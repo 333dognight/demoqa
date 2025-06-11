@@ -2,15 +2,10 @@ package pages;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
-import com.github.javafaker.Faker;
 import demoqa.builders.DataGenerator;
-import demoqa.builders.TestData;
 import demoqa.models.RegistrationPageApiModel;
-import org.junit.jupiter.api.BeforeEach;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultsModal;
-
-import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;

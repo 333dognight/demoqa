@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'java'
 }
 
 repositories {
@@ -10,11 +10,11 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.12.2')
     testImplementation 'com.codeborne:selenide:7.9.0'
     implementation 'commons-io:commons-io:2.18.0'
-    implementation 'com.github.javafaker:javafaker:1.0.2'
-    compileOnly 'org.projectlombok:lombok:1.18.34'
-    annotationProcessor 'org.projectlombok:lombok:1.18.34'
-    testCompileOnly 'org.projectlombok:lombok:1.18.34'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+    implementation "net.datafaker:datafaker:2.2.2"
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    testCompileOnly("org.projectlombok:lombok:1.18.38")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.38")
 }
 
 test {
@@ -22,5 +22,6 @@ test {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+    options.encoding = "UTF-8"
 }

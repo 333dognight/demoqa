@@ -1,8 +1,8 @@
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.*;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 
 public class GitHubSearchTest extends TestBase {
     @Test
@@ -14,7 +14,9 @@ public class GitHubSearchTest extends TestBase {
         $("#query-builder-test").setValue("Selenide").pressEnter();
 
         // проверить, что репозиторий Selenide на 1-м месте в результатах поиска
-        $("#results-list div").click();
+        $("[data-testid='results-list']").$$("div").get(0).$("a").click();
+        $("#repository-container-header").shouldHave(text("selenide / selenide"));
 
+        //SelenideElement secondItem = $$(".list .item").findBy(Condition.text("Второй"));
     }
 }

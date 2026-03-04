@@ -1,6 +1,8 @@
+package oldTests;
+
 import demoqa.models.RegistrationPageApiModel;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPageWithFaker;
+import demoqa.pages.RegistrationPageWithFaker;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxTests extends TestBase {

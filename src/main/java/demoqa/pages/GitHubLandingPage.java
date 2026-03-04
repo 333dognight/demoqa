@@ -1,4 +1,4 @@
-package pages;
+package demoqa.pages;
 
 public class GitHubLandingPage {
 }

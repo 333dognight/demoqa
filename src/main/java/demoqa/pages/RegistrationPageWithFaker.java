@@ -1,11 +1,11 @@
-package pages;
+package demoqa.pages;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import demoqa.builders.DataGenerator;
 import demoqa.models.RegistrationPageApiModel;
-import pages.components.CalendarComponent;
-import pages.components.RegistrationResultsModal;
+import demoqa.pages.components.CalendarComponent;
+import demoqa.pages.components.RegistrationResultsModal;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -19,8 +19,6 @@ public class RegistrationPageWithFaker {
 
     CalendarComponent calendarComponent = new CalendarComponent();
     RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
-
-    private final String TITLE_TEXT = "Student Registration Form";
 
     private final SelenideElement
             firstNameInput = $("#firstName"),
@@ -45,6 +43,7 @@ public class RegistrationPageWithFaker {
 
     public RegistrationPageWithFaker openPage() {
         open("/automation-practice-form");
+        String TITLE_TEXT = "Student Registration Form";
         $(".practice-form-wrapper").shouldHave(text(TITLE_TEXT));
         return this;
     }
